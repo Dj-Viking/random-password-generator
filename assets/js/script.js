@@ -110,13 +110,13 @@ var generatePassword = function(){
         var integer = searchIntegerInArrayReturnInt (passLengthCriteria, passLengthArray)
         //another function returning the value of the integer GOES HERE!!! PLACE IT IN THE CONDITIOINAL BELOW!!
         if(x === true  && 
-          integer > 8 &&
+          integer >= 8 &&
           integer <= 128){
           //yes function is true, user entered a number in the array AND number > 8 && number <= 128
           console.log("a " + x + " password generation process will begin!");
           console.log("Password length: " + integer);
           restart = false;//the if condition is true so restart is false!!
-          break;//break out of the while loop! we chose a password length number!
+          break;//break out of the while loop! we chose a password length number! otherwise you will stay in the while loop!!
         } else { x === false  //condition is false so restart will be true the user entered a number not in the array
           window.alert("number needs to be a whole number integer between 8-128!!");
           restart = true;
@@ -130,32 +130,31 @@ var generatePassword = function(){
       );
         if(userChooseUpperCase === true){
           console.log("user UpperCase: " + userChooseUpperCase);
-         //call the array up
-         console.log(upperCaseArray); 
-         //shuffle the array
-         shuffleArray(upperCaseArray);
-         console.log(shuffleArray(upperCaseArray));
-         //cut the length of the array by the password length the user chose
-
-         //create new name for the array to store the returned value of shuffled array
-         putshithere = shuffleArray(upperCaseArray);
-         //store the new array in another variable putshithere
+          //call the array up
+          console.log(upperCaseArray); 
+          //shuffle the array
+          console.log(shuffleArray(upperCaseArray));
+          //cut the length of the array by the password length the user chose
          
-          console.log("push it here array\n" + putshithere);
-        } else {
-          console.log("user UpperCase: " + userChooseUpperCase);
-        }
-      //ask user to choose upper case letters true or false
-      var userChooseLowerCase = window.confirm(
-        "Do you want lowercase letters in your password?"
-      );
-        if(userChooseLowerCase === true){
-          console.log("user LowerCase: " + userChooseLowerCase);
+          //create new name for the array to store the returned value of shuffled array
+          putshithere = shuffleArray(upperCaseArray);
+          //store the new array in another variable putshithere
           
-          console.log("push it here array\n" + putshithere);
-        } else {
-          console.log("user LowerCase: " + userChooseLowerCase);
-        }
+            console.log("push it here array\n" + putshithere);
+          } else {
+            console.log("user UpperCase: " + userChooseUpperCase);
+          }
+        //ask user to choose upper case letters true or false
+        var userChooseLowerCase = window.confirm(
+          "Do you want lowercase letters in your password?"
+        );
+          if(userChooseLowerCase === true){
+            console.log("user LowerCase: " + userChooseLowerCase);
+            
+            console.log("push it here array\n" + putshithere);
+          } else {
+            console.log("user LowerCase: " + userChooseLowerCase);
+          }
 
       var userChooseSpecialChar = window.confirm(
         "Do you want special characters in your password?"
