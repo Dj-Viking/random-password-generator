@@ -117,13 +117,10 @@ var generatePassword = function(){
           console.log("Password length: " + integer);
           restart = false;//the if condition is true so restart is false!!
           break;//break out of the while loop! we chose a password length number!
-        } else if (x === false  &&//only one of these conditions needs to be true to enter this branch
-          integer > 8 &&
-          integer <= 128){//condition is false so restart will be true the user entered a number not in the array
+        } else { x === false  //condition is false so restart will be true the user entered a number not in the array
           window.alert("number needs to be a whole number integer between 8-128!!");
           restart = true;
-        } else {//user chooses not to input anything closes the window -  create condition if password length is null then do nothing
-          break;
+        
         }
     }   
         console.log("user entered a choice of password length of: " + passLengthCriteria);
@@ -132,7 +129,7 @@ var generatePassword = function(){
         "Do you want uppercase letters in your password?"
       );
         if(userChooseUpperCase === true){
-          console.log("user UpperCase: " + true);
+          console.log("user UpperCase: " + userChooseUpperCase);
          //call the array up
          console.log(upperCaseArray); 
          //shuffle the array
@@ -146,36 +143,36 @@ var generatePassword = function(){
          
           console.log("push it here array\n" + putshithere);
         } else {
-          console.log("user UpperCase: " + false);
+          console.log("user UpperCase: " + userChooseUpperCase);
         }
       //ask user to choose upper case letters true or false
       var userChooseLowerCase = window.confirm(
         "Do you want lowercase letters in your password?"
       );
         if(userChooseLowerCase === true){
-          console.log("user LowerCase: " + true);
+          console.log("user LowerCase: " + userChooseLowerCase);
           
           console.log("push it here array\n" + putshithere);
         } else {
-          console.log("user LowerCase: " + false);
+          console.log("user LowerCase: " + userChooseLowerCase);
         }
 
       var userChooseSpecialChar = window.confirm(
         "Do you want special characters in your password?"
       );
         if(userChooseSpecialChar === true){
-          console.log("user SpecialChar: " + true);
+          console.log("user SpecialChar: " + userChooseSpecialChar);
         } else {
-          console.log("user SpecialChar " + false);  
+          console.log("user SpecialChar " + userChooseSpecialChar);  
         }
 
       var userChooseNumberChar = window.confirm(
         "Do you want numbers in your password?"
       );
         if(userChooseNumberChar === true){
-          console.log("user NumberChar: " + true);
+          console.log("user NumberChar: " + userChooseNumberChar);
         } else {
-          console.log("user NumberChar " + false); 
+          console.log("user NumberChar " + userChooseNumberChar); 
         }
 
 
