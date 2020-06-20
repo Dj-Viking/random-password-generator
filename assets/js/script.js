@@ -30,8 +30,8 @@ var numberCharArray = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
 var populatedArrayResult = ["this will be the shuffled array from selected criteria"]
 
-//SHUFFLE FUNCTION
-//PULL FROM AN ARRAY FUNCTION
+
+
 
 
 
@@ -50,8 +50,22 @@ function searchIntegerInArray (passLengthCriteria, passLengthArray) {
   }
   return false;//integer is not in the array
 }
+function searchIntegerInArrayReturnInt (passLengthCriteria, passLengthArray) {
+  //parse the prompt input into an integer before searching in the loop!
+  parseInt(passLengthCriteria);
+  //create the variable for the string converted to an integer
+  //to be stored. int now contains the integer parsed from passLengthCriteria string "8" through "128"
+  var int = passLengthCriteria;
+  for (var j=0; j<passLengthArray.length; j++) {
+      // searching for the integer that is converted from a string before entering the loop!
+      if (passLengthArray.includes(int))
+        return int;//the integer is in the array
+  }
+  return false;//integer is not in the array
+}
 //initializing this here just in case.
 var anyArray = Array(6).fill(1);
+//SHUFFLE FUNCTION DONE
 //can place an array of your choice to shuffle just replace the anyArray parameter with
 //any array that you want to shuffle
 function shuffleArray(anyArray) {
@@ -93,19 +107,25 @@ var generatePassword = function(){
         searchIntegerInArray (passLengthCriteria, passLengthArray);
         //verifying if the function is true that user picked a number in the array
         var x = searchIntegerInArray(passLengthCriteria, passLengthArray);
+        var integer = searchIntegerInArrayReturnInt (passLengthCriteria, passLengthArray)
         //another function returning the value of the integer GOES HERE!!! PLACE IT IN THE CONDITIOINAL BELOW!!
-        if(x === true /* && */
-          //number > 8 &&
-          //number <= 128
-          ){//yes function is true, user entered a number in the array AND number > 8 && number <= 128
+        if(x === true  && 
+          integer > 8 &&
+          integer <= 128){
+          //yes function is true, user entered a number in the array AND number > 8 && number <= 128
           console.log("a " + x + " password generation process will begin!");
+          console.log("Password length: " + integer);
           restart = false;//the if condition is true so restart is false!!
           break;//break out of the while loop! we chose a password length number!
-        } else {//condition is false so restart will be true the user entered a number not in the array
-          window.alert("number needs to be between 8-128!!");
+        } else if (x === false  &&//only one of these conditions needs to be true to enter this branch
+          integer > 8 &&
+          integer <= 128){//condition is false so restart will be true the user entered a number not in the array
+          window.alert("number needs to be a whole number integer between 8-128!!");
           restart = true;
+        } else {//user chooses not to input anything closes the window -  create condition if password length is null then do nothing
+          break;
         }
-    }
+    }   
         console.log("user entered a choice of password length of: " + passLengthCriteria);
       //ask user to choose upper case letters true or false
       var userChooseUpperCase = window.confirm(
