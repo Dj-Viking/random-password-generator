@@ -5,10 +5,11 @@
 //DONE    * have the number entered in the prompt display the choice they made GOT IT
 //DONE    * write a password to the text area, anything will do for now GOT IT
 //DONE    * make special arrays for 26 english letters, numbers 0-9, and special characters ~!@#$%^&*()_+ GOT IT
-//    * create more conditional statements to guide the user through choosing true or false do they want to have uppercase, lowercase, special, characters, numbers, USER MUST CHOOSE ONE OR IT STARTS OVER TO BEGINNING OF CHOICES
-//    * make the functions inside an array which pulls characters from the arrays of 26 english letters, numbers 0-9, and special characters
-//    * these functions are numbered as the 8-128 character length for a password to write 
-//    * make password = (result of all the choices that came from picking the user typing the character amount
+//DONE    * create more conditional statements to guide the user through choosing true or false do they want to have uppercase, lowercase, special, characters, numbers, USER MUST CHOOSE ONE OR IT STARTS OVER TO BEGINNING OF CHOICES
+//DONE    * make the functions which pulls characters from the arrays of 26 english letters, numbers 0-9, and special characters and shuffles them
+//    * make function that returns the value of the password length that the user wants use this in the conditional statement
+//    * call up an array, shuffle it, cut or expand the length of the array to the RETURNED VALUE OF THE FUNCTION that the user entered a number between 8-128 for   
+//    * make password = (result of all the choices that came from picking the user typing the character amount 
 //    
 
 
@@ -34,8 +35,8 @@ var populatedArrayResult = ["this will be the shuffled array from selected crite
 
 
 
-//initializing an important variable!!!
-var passLengthCriteria = 0;
+//initializing an important variable!!! maybe dont need to initialize...
+//var passLengthCriteria = 0;
 function searchIntegerInArray (passLengthCriteria, passLengthArray) {
   //parse the prompt input into an integer before searching in the loop!
   parseInt(passLengthCriteria);
@@ -45,9 +46,24 @@ function searchIntegerInArray (passLengthCriteria, passLengthArray) {
   for (var j=0; j<passLengthArray.length; j++) {
       // searching for the integer that is converted from a string before entering the loop!
       if (passLengthArray.includes(int))
-        return true;//integer is in the array
+        return true;//the integer is in the array
   }
   return false;//integer is not in the array
+}
+//initializing this here just in case.
+var anyArray = Array(6).fill(1);
+//can place an array of your choice to shuffle just replace the anyArray parameter with
+//any array that you want to shuffle
+function shuffleArray(anyArray) {
+  for (var i = anyArray.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = anyArray[i];
+      anyArray[i] = anyArray[j];
+      anyArray[j] = temp;
+  }
+  return anyArray;
+  //console.log(myArray);
+  //console.log(numberArray.map(String));
 }
 
 //var passLengthArray = 
@@ -77,40 +93,79 @@ var generatePassword = function(){
         searchIntegerInArray (passLengthCriteria, passLengthArray);
         //verifying if the function is true that user picked a number in the array
         var x = searchIntegerInArray(passLengthCriteria, passLengthArray);
-        if(x === true){//yes function is true, user entered a number in the array
-          console.log("user generated a " + x + " password!");
-          restart = false;
-          break;
-        } else {//false the user entered a number not in the array
+        //another function returning the value of the integer GOES HERE!!! PLACE IT IN THE CONDITIOINAL BELOW!!
+        if(x === true /* && */
+          //number > 8 &&
+          //number <= 128
+          ){//yes function is true, user entered a number in the array AND number > 8 && number <= 128
+          console.log("a " + x + " password generation process will begin!");
+          restart = false;//the if condition is true so restart is false!!
+          break;//break out of the while loop! we chose a password length number!
+        } else {//condition is false so restart will be true the user entered a number not in the array
           window.alert("number needs to be between 8-128!!");
           restart = true;
         }
     }
         console.log("user entered a choice of password length of: " + passLengthCriteria);
+      //ask user to choose upper case letters true or false
       var userChooseUpperCase = window.confirm(
         "Do you want uppercase letters in your password?"
       );
+        if(userChooseUpperCase === true){
+          console.log("user UpperCase: " + true);
+         //call the array up
+         console.log(upperCaseArray); 
+         //shuffle the array
+         shuffleArray(upperCaseArray);
+         console.log(shuffleArray(upperCaseArray));
+         //cut the length of the array by the password length the user chose
 
+         //create new name for the array to store the returned value of shuffled array
+         putshithere = shuffleArray(upperCaseArray);
+         //store the new array in another variable putshithere
+         
+          console.log("push it here array\n" + putshithere);
+        } else {
+          console.log("user UpperCase: " + false);
+        }
+      //ask user to choose upper case letters true or false
       var userChooseLowerCase = window.confirm(
         "Do you want lowercase letters in your password?"
       );
+        if(userChooseLowerCase === true){
+          console.log("user LowerCase: " + true);
+          
+          console.log("push it here array\n" + putshithere);
+        } else {
+          console.log("user LowerCase: " + false);
+        }
 
       var userChooseSpecialChar = window.confirm(
         "Do you want special characters in your password?"
       );
+        if(userChooseSpecialChar === true){
+          console.log("user SpecialChar: " + true);
+        } else {
+          console.log("user SpecialChar " + false);  
+        }
 
       var userChooseNumberChar = window.confirm(
         "Do you want numbers in your password?"
       );
+        if(userChooseNumberChar === true){
+          console.log("user NumberChar: " + true);
+        } else {
+          console.log("user NumberChar " + false); 
+        }
 
 
       
   console.log("generating password..")
   //password will contain the result of the random shuffling of the password which contains all of whatever criteria the user confirmed they wanted for their password to be
   console.log("declaring the value of the variable `password` as the function generatePassword() brought me here...")
-  console.log("the string value of the new password pulled from an array is " + password);
   //return this value as the result of generating the password here is the end of the function
   password = populatedArrayResult;
+  console.log("the string value of the new password pulled from an array is " + password);
   return password;
 
 }
