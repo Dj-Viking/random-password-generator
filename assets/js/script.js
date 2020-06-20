@@ -40,14 +40,14 @@ function searchIntegerInArray (passLengthCriteria, passLengthArray) {
   //parse the prompt input into an integer before searching in the loop!
   parseInt(passLengthCriteria);
   //create the variable for the string converted to an integer
-  //to be stored. int now contains the integer parsed from passLengthCriteria
+  //to be stored. int now contains the integer parsed from passLengthCriteria string "8" through "128"
   var int = passLengthCriteria;
   for (var j=0; j<passLengthArray.length; j++) {
-      //
+      // searching for the integer that is converted from a string before entering the loop!
       if (passLengthArray.includes(int))
-        return true;
+        return true;//integer is in the array
   }
-  return false; 
+  return false;//integer is not in the array
 }
 
 //var passLengthArray = 
@@ -69,23 +69,42 @@ function searchIntegerInArray (passLengthCriteria, passLengthArray) {
 //define and declare the function generatePassword();
 var generatePassword = function(){
   //debugger;
-  
-      
-        var passLengthCriteria = window.prompt(
-        "enter how many characters you want your password to be: enter any number between 8-128"
-        );
+     
+    while (restart = true){
+      var passLengthCriteria = window.prompt(
+      "enter how many characters you want your password to be: enter any number between 8-128"
+      );
         searchIntegerInArray (passLengthCriteria, passLengthArray);
-        //verifying if the function is true
+        //verifying if the function is true that user picked a number in the array
         var x = searchIntegerInArray(passLengthCriteria, passLengthArray);
         if(x === true){//yes function is true, user entered a number in the array
           console.log("user generated a " + x + " password!");
+          restart = false;
+          break;
         } else {//false the user entered a number not in the array
-          
           window.alert("number needs to be between 8-128!!");
-          generatePassword();
+          restart = true;
         }
+    }
+        console.log("user entered a choice of password length of: " + passLengthCriteria);
+      var userChooseUpperCase = window.confirm(
+        "Do you want uppercase letters in your password?"
+      );
 
-  console.log("user entered a choice of password length of: " + passLengthCriteria);
+      var userChooseLowerCase = window.confirm(
+        "Do you want lowercase letters in your password?"
+      );
+
+      var userChooseSpecialChar = window.confirm(
+        "Do you want special characters in your password?"
+      );
+
+      var userChooseNumberChar = window.confirm(
+        "Do you want numbers in your password?"
+      );
+
+
+      
   console.log("generating password..")
   //password will contain the result of the random shuffling of the password which contains all of whatever criteria the user confirmed they wanted for their password to be
   console.log("declaring the value of the variable `password` as the function generatePassword() brought me here...")
