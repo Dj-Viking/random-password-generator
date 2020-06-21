@@ -77,16 +77,16 @@ var myPassLengthModifier = function(myArray, passLengthCriteria){
       modifiedArray.length = passLengthCriteria;
       console.log("here is your new array \n" + modifiedArray);
       return modifiedArray;
-  } else if(passLengthCriteria >=8 &&//user chooses password length of more than 8 but less than 26
-            passLengthCriteria <=25) {
-            shuffleArray(modifiedArray);
-            modifiedArray.length = passLengthCriteria;
-            shuffleArray(modifiedArray);         
-            console.log("here is your new array \n" + modifiedArray);
-            return modifiedArray;
-  } else { 
-    
-  }
+    } else if(passLengthCriteria >=8 &&//user chooses password length of more than 8 but less than 26
+              passLengthCriteria <=25) {
+              shuffleArray(modifiedArray);
+              modifiedArray.length = passLengthCriteria;
+              shuffleArray(modifiedArray);         
+              console.log("here is your new array \n" + modifiedArray);
+              return modifiedArray;
+    } else { 
+      
+    }
                                              
 }
 //stored the returned capital letter array into a newly declared variable
