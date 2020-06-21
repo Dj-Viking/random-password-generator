@@ -170,6 +170,56 @@ var myLowerPassLengthModifier = function(myArray, passLengthCriteria){
                                              
 }
 
+var myNumberLengthModifier = function(myArray, passLengthCriteria){
+  
+  //var passLengthCriteria = window.prompt(//this is done at the beginning carrying the value over
+      //"enter how many characters you want your password to be: enter any number between 8-128"
+      //);
+
+    //specialchar scrambler
+    numberTemp =["0", "1", "2", "3", "4", "5", "6", "7", "8", "9","0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+    console.log(myArray);
+    var modifiedArray = myArray.concat(numberTemp);
+    shuffleArray(modifiedArray);
+    shuffleArray(modifiedArray);
+    shuffleArray(modifiedArray);
+    shuffleArray(modifiedArray);
+    console.log("shuffled special character array");
+    console.log(modifiedArray);
+    if(passLengthCriteria >= 26 && //if user chooses more than 26 letters
+      passLengthCriteria <= 128){//and the number is lessthan or equal to 128
+      //generate new array of capital letters to concat
+      modifiedArray = myArray.concat(numberTemp);
+      //shuffle array
+      shuffleArray(modifiedArray);
+      console.log("shuffling array that im concatting to lowerarray");
+      shuffleArray(modifiedArray);
+      shuffleArray(modifiedArray);
+      shuffleArray(modifiedArray);
+      console.log(modifiedArray);
+      modifiedArray.length = passLengthCriteria;
+      console.log("here is your new array \n" + modifiedArray);
+      return modifiedArray;
+    } else if(passLengthCriteria >=8 &&//user chooses password length of more than 8 but less than 26
+              passLengthCriteria <=25) {
+              modifiedArray = myArray.concat(numberTemp);
+              //shuffle array
+              shuffleArray(modifiedArray);
+              console.log("shuffling array that im concatting to lowerarray");
+              shuffleArray(modifiedArray);
+              shuffleArray(modifiedArray);
+              shuffleArray(modifiedArray);
+              shuffleArray(modifiedArray);
+              modifiedArray.length = passLengthCriteria;
+              shuffleArray(modifiedArray);         
+              console.log("here is your new array \n" + modifiedArray);
+              return modifiedArray;
+    } else { 
+      
+    }
+                                             
+}
+
 var mySpecialCharLengthModifier = function(myArray, passLengthCriteria){
   
   //var passLengthCriteria = window.prompt(//this is done at the beginning carrying the value over
@@ -177,7 +227,7 @@ var mySpecialCharLengthModifier = function(myArray, passLengthCriteria){
       //);
 
     //specialchar scrambler
-    specialCharTemp =["~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+","~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+","~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+","~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+"]
+    specialCharTemp =["~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+","~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")","~", "!", "@", "#", "$", "%"]
     console.log(myArray);
     var modifiedArray = myArray.concat(specialCharTemp);
     shuffleArray(modifiedArray);
@@ -324,6 +374,7 @@ var generatePassword = function(){
           //PUT IN MODIFIER FUNCTION HERE
           myUpperPassLengthModifier(upperCaseArray, passLengthCriteria);
           var newModifiedArrayUpperCase = myUpperPassLengthModifier(upperCaseArray, passLengthCriteria);
+          ////var testoutput = newModifiedArrayUpperCase;
           console.log("here is the new array\n" + newModifiedArrayUpperCase);
           } else {
             console.log("user UpperCase: " + userChooseUpperCase);//false didn't choose uppercase
@@ -335,10 +386,11 @@ var generatePassword = function(){
         if(userChooseLowerCase === true){
           console.log("user LowerCase: " + userChooseLowerCase);//true
           //start adding lowercase letters and scramble into the uppercasearray
-          //pass newmodified into here
+          //pass new modified Upper case into here
           myLowerPassLengthModifier(newModifiedArrayUpperCase, passLengthCriteria);
+          //pass the return value into new modified lower case
           var newModifiedArrayLowerCase = myLowerPassLengthModifier(newModifiedArrayUpperCase, passLengthCriteria);
-          var testoutput = newModifiedArrayLowerCase;
+          //var testoutput = newModifiedArrayLowerCase;
           console.log("here is the new array\n" + newModifiedArrayLowerCase);
         } else {
           console.log("user LowerCase: " + userChooseLowerCase);//false
@@ -349,6 +401,12 @@ var generatePassword = function(){
       );
         if(userChooseSpecialChar === true){
           console.log("user SpecialChar: " + userChooseSpecialChar);//true
+          //ADD SYMBOLS AND SCRAMBLE!!!!
+          mySpecialCharLengthModifier(newModifiedArrayLowerCase, passLengthCriteria);
+          //STORE IT
+          var newModifiedArraySpecialChar = mySpecialCharLengthModifier(newModifiedArrayLowerCase, passLengthCriteria);
+          //PASS IT 
+          //var testoutput = newModifiedArraySpecialChar;
         } else {
           console.log("user SpecialChar " + userChooseSpecialChar);//false  
         }
@@ -358,6 +416,12 @@ var generatePassword = function(){
       );
         if(userChooseNumberChar === true){
           console.log("user NumberChar: " + userChooseNumberChar);//true
+          //ADD NUMBERS AND SCRAMBLE!!!
+          myNumberLengthModifier(newModifiedArraySpecialChar, passLengthCriteria);
+          //STORE IT
+          var newModifiedArrayNumber = myNumberLengthModifier(newModifiedArraySpecialChar, passLengthCriteria);
+          //PASS IT
+          var testoutput = newModifiedArrayNumber;
         } else {
           console.log("user NumberChar " + userChooseNumberChar);//false
         }
