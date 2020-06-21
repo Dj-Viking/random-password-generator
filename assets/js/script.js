@@ -9,9 +9,9 @@
 //DONE    * make the functions which pulls characters from the arrays of 26 english letters, numbers 0-9, and special characters and shuffles them
 //DONE    * make function that returns the value of the password length that the user wants use this in the conditional statement
 //DONE    * call up an array, shuffle it, cut or expand the length of the array to the RETURNED VALUE OF THE FUNCTION that the user entered a number between 8-128  
-//    * passing the password along if user chooses at least one of the options....right now if no options are chosen no password is written
+//DONE    * passing the password along if user chooses at least one of the options....right now if no options are chosen no password is written
 //DONE    * make password = (result of all the choices that came from picking the user typing the character amount 
-//    
+//    * allow the user to close the prompt without having to close the browser page.        
 
 
 var generateBtn = document.querySelector("#generate");
