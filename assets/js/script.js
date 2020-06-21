@@ -8,8 +8,9 @@
 //DONE    * create more conditional statements to guide the user through choosing true or false do they want to have uppercase, lowercase, special, characters, numbers, USER MUST CHOOSE ONE OR IT STARTS OVER TO BEGINNING OF CHOICES
 //DONE    * make the functions which pulls characters from the arrays of 26 english letters, numbers 0-9, and special characters and shuffles them
 //DONE    * make function that returns the value of the password length that the user wants use this in the conditional statement
-//    * call up an array, shuffle it, cut or expand the length of the array to the RETURNED VALUE OF THE FUNCTION that the user entered a number between 8-128 for   
-//    * make password = (result of all the choices that came from picking the user typing the character amount 
+//DONE    * call up an array, shuffle it, cut or expand the length of the array to the RETURNED VALUE OF THE FUNCTION that the user entered a number between 8-128  
+//    * passing the password along if user chooses at least one of the options....right now if no options are chosen no password is written
+//DONE    * make password = (result of all the choices that came from picking the user typing the character amount 
 //    
 
 
@@ -88,7 +89,7 @@ var myUpperPassLengthModifier = function(myArray, passLengthCriteria){
       //"enter how many characters you want your password to be: enter any number between 8-128"
       //);
     var myArray = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z","A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z","A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z","A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z","A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
-    var addToArray = genUpperCharArray(charA, charZ);
+    var addToArray = genUpperCharArray(charA, charZ);//this is the first option that actually generates an array...must have a generation option for each..
     var modifiedArray = myArray.concat(addToArray);
     if(passLengthCriteria >= 26 && //if user chooses more than 26 letters
       passLengthCriteria <= 128){
@@ -125,7 +126,6 @@ var myLowerPassLengthModifier = function(myArray, passLengthCriteria){
   //var passLengthCriteria = window.prompt(//this is done at the beginning carrying the value over
       //"enter how many characters you want your password to be: enter any number between 8-128"
       //);
-
     //lowercase scrambler
     lowerarray =["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z","a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z","a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z","a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z","a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z","a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
     console.log(myArray);
@@ -378,15 +378,25 @@ var generatePassword = function(){
           console.log("here is the new array\n" + newModifiedArrayUpperCase);
           } else {
             console.log("user UpperCase: " + userChooseUpperCase);//false didn't choose uppercase
+            
           }
+          function setDefaultLower(){
+            var templowerarray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z","a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z","a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z","a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z","a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z","a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+          var newModifiedArrayUpperCase = templowerarray;
+          return newModifiedArrayUpperCase;
+          }
+          var temporarylowerarray = setDefaultLower(); 
       //ask user to choose upper case letters true or false
       var userChooseLowerCase = window.confirm(
         "Do you want lowercase letters in your password?"
       );
-        if(userChooseLowerCase === true){
+        if(userChooseLowerCase === true) {
           console.log("user LowerCase: " + userChooseLowerCase);//true
           //start adding lowercase letters and scramble into the uppercasearray
           //pass new modified Upper case into here
+          if(newModifiedArrayUpperCase === undefined ){
+            newModifiedArrayUpperCase = temporarylowerarray;
+          }
           myLowerPassLengthModifier(newModifiedArrayUpperCase, passLengthCriteria);
           //pass the return value into new modified lower case
           var newModifiedArrayLowerCase = myLowerPassLengthModifier(newModifiedArrayUpperCase, passLengthCriteria);
