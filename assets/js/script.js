@@ -93,7 +93,7 @@ var myPassLengthModifier = function(myArray, passLengthCriteria){
 //var newModifiedArrayUpperCase = myPassLengthModifier(myArray, passLengthCriteria);
 
 /**************************************************************** */
-/*****************PASSWORD MODIFIER FUNCTION END!!!************** */
+/*****************PASSWORD MODIFIER FUNCTIONS END!!!************** */
 /**************************************************************** */
 
 
