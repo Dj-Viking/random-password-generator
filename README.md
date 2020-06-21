@@ -26,14 +26,14 @@ Currently answering "No" or closing the window prompt to every question will not
 
 Uppercase   Lowercase  Symbols  Numbers 
 
-YES           YES        YES      YES
-YES           YES        YES       NO
-YES           YES        NO        NO
-YES           NO         NO        NO
-NO            NO         NO        NO
-NO            YES        YES      YES
-NO            NO         YES      YES
-NO            NO         NO       YES
+YES, YES, YES, YES
+YES,YES, YES, NO
+YES, YES, NO, NO
+YES, NO, NO, NO
+NO, NO, NO, NO
+NO, YES, YES, YES
+NO, NO, YES, YES
+NO, NO, NO, YES
 
 # Bugged choices
  -YES NO YES YES 
