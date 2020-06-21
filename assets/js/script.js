@@ -44,8 +44,6 @@ var specialCharArray = [ "~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", 
 
 var numberCharArray = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
-var populatedArrayResult = ["this will be the shuffled array from selected criteria"]
-
 //UPPERCASE GENERATOR
 var charA = "A";
 var charZ = "Z";
@@ -127,7 +125,7 @@ var myLowerPassLengthModifier = function(myArray, passLengthCriteria){
       //"enter how many characters you want your password to be: enter any number between 8-128"
       //);
     //lowercase scrambler
-    lowerarray =["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z","a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z","a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z","a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z","a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z","a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+    var lowerarray =["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z","a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z","a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z","a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z","a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z","a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
     console.log(myArray);
     var modifiedArray = myArray.concat(lowerarray);
     shuffleArray(modifiedArray);
@@ -177,19 +175,28 @@ var myNumberLengthModifier = function(myArray, passLengthCriteria){
       //);
 
     //specialchar scrambler
-    numberTemp =["0", "1", "2", "3", "4", "5", "6", "7", "8", "9","0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+    var numberTemp =["0", "1", "2", "3", "4", "5", "6", "7", "8", "9","0", "1", "2", "3", "4", "5", "6", "7", "8", "9","2", "3", "4", "5", "6", "7", "8", "9","2", "3", "4", "5", "6", "7", "8", "9"]
+    console.log("entering the number length modifier function!!!!!!!!");
     console.log(myArray);
+    console.log("that is your current array!!");
     var modifiedArray = myArray.concat(numberTemp);
+    console.log(modifiedArray);
+    console.log("modified: before shuffle")
     shuffleArray(modifiedArray);
     shuffleArray(modifiedArray);
     shuffleArray(modifiedArray);
     shuffleArray(modifiedArray);
     console.log("shuffled special character array");
     console.log(modifiedArray);
+    console.log("modified the length!!!")
+    modifiedArray.length = passLengthCriteria;
+    console.log("array length!!!" + modifiedArray.length);
     if(passLengthCriteria >= 26 && //if user chooses more than 26 letters
       passLengthCriteria <= 128){//and the number is lessthan or equal to 128
       //generate new array of capital letters to concat
       modifiedArray = myArray.concat(numberTemp);
+      console.log(modifiedArray);
+      console.log(modifiedArray.length);
       //shuffle array
       shuffleArray(modifiedArray);
       console.log("shuffling array that im concatting to lowerarray");
@@ -321,25 +328,11 @@ function shuffleArray(anyArray) {
   //console.log(numberArray.map(String));
 }
 
-//var passLengthArray = 
-//[
-  //index 0 will determine password is 8 characters long
-  //"8",//function here that can pull numbers, characters from english alphabet, and select special symbols and arrange them all randomly somehow using a random string generator pulling numbers, letters, and special characters
-  //index 1 pass is 9 characters long
-  //"9",
-  //index 2 pass is 10 characters long
-  //create function inside this passlengtharray index value that arranges characters which are placed into this passlengtharray index
-  //"10", 
-  
-  
-//]
-
 //characters stored in this array are referred to by its object index string
 //example referencing the string stored in the object name index0 the reference is like this passLengthArrayObj[0].index0
-//referencing strings from a regular array are referenced by index number array[0]
 //define and declare the function generatePassword();
 var generatePassword = function(){
-  debugger;
+  //debugger;
      
     while (restart = true){
       var passLengthCriteria = window.prompt(
@@ -365,6 +358,7 @@ var generatePassword = function(){
         }
     }   
         console.log("user entered a choice of password length of: " + passLengthCriteria);
+      
       //ask user to choose upper case letters true or false
       var userChooseUpperCase = window.confirm(
         "Do you want uppercase letters in your password?"
@@ -374,7 +368,7 @@ var generatePassword = function(){
           //PUT IN MODIFIER FUNCTION HERE
           myUpperPassLengthModifier(upperCaseArray, passLengthCriteria);
           var newModifiedArrayUpperCase = myUpperPassLengthModifier(upperCaseArray, passLengthCriteria);
-          ////var testoutput = newModifiedArrayUpperCase;
+          var testoutput = newModifiedArrayUpperCase;
           console.log("here is the new array\n" + newModifiedArrayUpperCase);
           } else {
             console.log("user UpperCase: " + userChooseUpperCase);//false didn't choose uppercase
@@ -382,11 +376,12 @@ var generatePassword = function(){
           }
           function setDefaultLower(){
             var templowerarray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z","a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z","a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z","a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z","a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z","a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-          var newModifiedArrayUpperCase = templowerarray;
-          return newModifiedArrayUpperCase;
+            var newModifiedArrayUpperCase = templowerarray;
+            return newModifiedArrayUpperCase;
           }
           var temporarylowerarray = setDefaultLower(); 
-      //ask user to choose upper case letters true or false
+
+      //ask user to choose lower case letters true or false
       var userChooseLowerCase = window.confirm(
         "Do you want lowercase letters in your password?"
       );
@@ -396,36 +391,61 @@ var generatePassword = function(){
           //pass new modified Upper case into here
           if(newModifiedArrayUpperCase === undefined ){
             newModifiedArrayUpperCase = temporarylowerarray;
+          } else {
+
           }
           myLowerPassLengthModifier(newModifiedArrayUpperCase, passLengthCriteria);
           //pass the return value into new modified lower case
           var newModifiedArrayLowerCase = myLowerPassLengthModifier(newModifiedArrayUpperCase, passLengthCriteria);
-          //var testoutput = newModifiedArrayLowerCase;
+          var testoutput = newModifiedArrayLowerCase;
           console.log("here is the new array\n" + newModifiedArrayLowerCase);
         } else {
           console.log("user LowerCase: " + userChooseLowerCase);//false
         }
-        
+        function setDefaultSpecialChar(){
+          var tempspecialchar = ["~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+","~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")","~", "!", "@", "#", "$", "%","~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+","~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")","~", "!", "@", "#", "$", "%","~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+","~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")","~", "!", "@", "#", "$", "%","~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+","~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")","~", "!", "@", "#", "$", "%","~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+","~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")","~", "!", "@", "#", "$", "%"]
+          var newModifiedArrayLowerCase = tempspecialchar;
+          return newModifiedArrayLowerCase;
+        }
+        var temporaryspecialchar = setDefaultSpecialChar(); 
+      //ask do you want special chars
       var userChooseSpecialChar = window.confirm(
         "Do you want special characters in your password?"
       );
         if(userChooseSpecialChar === true){
           console.log("user SpecialChar: " + userChooseSpecialChar);//true
+          if(newModifiedArrayLowerCase === undefined ){
+            newModifiedArrayLowerCase = temporaryspecialchar;
+          } else {
+
+          }
           //ADD SYMBOLS AND SCRAMBLE!!!!
           mySpecialCharLengthModifier(newModifiedArrayLowerCase, passLengthCriteria);
           //STORE IT
           var newModifiedArraySpecialChar = mySpecialCharLengthModifier(newModifiedArrayLowerCase, passLengthCriteria);
           //PASS IT 
-          //var testoutput = newModifiedArraySpecialChar;
+          var testoutput = newModifiedArraySpecialChar;
         } else {
           console.log("user SpecialChar " + userChooseSpecialChar);//false  
         }
-
+        function setDefaultNumbers(){
+          var tempnumbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9","0", "1", "2", "3", "4", "5", "6", "7", "8", "9","0", "1", "2", "3", "4", "5", "6", "7", "8","0", "1", "2", "3", "4", "5", "6", "7", "8", "9","0", "1", "2", "3", "4", "5", "6", "7", "8","0", "1", "2", "3", "4", "5", "6", "7", "8", "9","0", "1", "2", "3", "4", "5", "6", "7", "8","6", "7", "8","0", "1", "2", "3", "4", "5", "6", "7", "8", "9","0", "1", "2", "3", "4", "5", "6", "7", "8","0", "1", "2", "3", "4", "5", "6", "7", "8", "9","0", "1", "2", "3", "4", "5", "6", "7", "8","6", "7", "8","0", "1", "2", "3", "4", "5", "6", "7", "8", "9","0", "1", "2", "3", "4", "5", "6", "7", "8","0", "1", "2", "3", "4", "5", "6", "7", "8", "9","0", "1", "2", "3", "4", "5", "6", "7", "8","6", "7", "8","0", "1", "2", "3", "4", "5", "6", "7", "8", "9","0", "1", "2", "3", "4", "5", "6", "7", "8","0", "1", "2", "3", "4", "5", "6", "7", "8", "9","0", "1", "2", "3", "4", "5", "6", "7", "8","6", "7", "8","0", "1", "2", "3", "4", "5", "6", "7", "8", "9","0", "1", "2", "3", "4", "5", "6", "7", "8","0", "1", "2", "3", "4", "5", "6", "7", "8", "9","0", "1", "2", "3", "4", "5", "6", "7", "8"]
+          var newModifiedArraySpecialChar = tempnumbers;
+          return newModifiedArraySpecialChar;
+        }
+        var temporarynumberarray = setDefaultNumbers();
+        console.log(newModifiedArraySpecialChar);
+      //ask do you want numbers
       var userChooseNumberChar = window.confirm(
         "Do you want numbers in your password?"
       );
         if(userChooseNumberChar === true){
           console.log("user NumberChar: " + userChooseNumberChar);//true
+          if(newModifiedArraySpecialChar === undefined ){
+            newModifiedArraySpecialChar = temporarynumberarray;
+          } else {
+
+          }
           //ADD NUMBERS AND SCRAMBLE!!!
           myNumberLengthModifier(newModifiedArraySpecialChar, passLengthCriteria);
           //STORE IT
