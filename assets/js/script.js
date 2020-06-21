@@ -45,7 +45,7 @@ function genCharArray(charA, charZ) {
 //console.log(genCharArray(charA, charZ));
 
 /**************************************************************** */
-/*****************PASSWORD MODIFIER FUNCTION START!!!****************** */
+/*****************PASSWORD MODIFIER FUNCTIONS START!!!****************** */
 /**************************************************************** */
 var myArray = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z","A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z","A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z","A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z","A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 //var array = Array(6).concat(myArray);
@@ -62,25 +62,30 @@ var myPassLengthModifier = function(myArray, passLengthCriteria){
     var myArray = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z","A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z","A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z","A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z","A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
     var addToArray = genCharArray(charA, charZ);
     var modifiedArray = myArray.concat(addToArray);
-    if(passLengthCriteria >= 26 && 
+    if(passLengthCriteria >= 26 && //if user chooses more than 26 letters
       passLengthCriteria <= 128){
-    //generate new array of capital letters to concat
-    addToArray = genCharArray(charA, charZ);
-    modifiedArray = myArray.concat(addToArray);
-    //shuffle array
-    shuffleArray(addToArray);
-    console.log("shuffling array that im concatting to myArray");
-    console.log(addToArray);
-    shuffleArray(modifiedArray);
-    shuffleArray(modifiedArray);
-    shuffleArray(modifiedArray);
-    modifiedArray.length = passLengthCriteria;
-    console.log("here is your new array \n" + modifiedArray);
-    return modifiedArray;
-  } else {
-     
-    //password is < 26 but more than 8 slice the array to the shorter length.
-    //console.log(modifiedArray);
+      //generate new array of capital letters to concat
+      addToArray = genCharArray(charA, charZ);
+      modifiedArray = myArray.concat(addToArray);
+      //shuffle array
+      shuffleArray(addToArray);
+      console.log("shuffling array that im concatting to myArray");
+      console.log(addToArray);
+      shuffleArray(modifiedArray);
+      shuffleArray(modifiedArray);
+      shuffleArray(modifiedArray);
+      modifiedArray.length = passLengthCriteria;
+      console.log("here is your new array \n" + modifiedArray);
+      return modifiedArray;
+  } else if(passLengthCriteria >=8 &&//user chooses password length of more than 8 but less than 26
+            passLengthCriteria <=25) {
+            shuffleArray(modifiedArray);
+            modifiedArray.length = passLengthCriteria;
+            shuffleArray(modifiedArray);         
+            console.log("here is your new array \n" + modifiedArray);
+            return modifiedArray;
+  } else { 
+    
   }
                                              
 }
@@ -156,7 +161,7 @@ function shuffleArray(anyArray) {
 //referencing strings from a regular array are referenced by index number array[0]
 //define and declare the function generatePassword();
 var generatePassword = function(){
-  debugger;
+  //debugger;
      
     while (restart = true){
       var passLengthCriteria = window.prompt(
@@ -205,17 +210,17 @@ var generatePassword = function(){
           } else {
             console.log("user UpperCase: " + userChooseUpperCase);//false didn't choose uppercase
           }
-        //ask user to choose upper case letters true or false
-        var userChooseLowerCase = window.confirm(
-          "Do you want lowercase letters in your password?"
-        );
-          if(userChooseLowerCase === true){
-            console.log("user LowerCase: " + userChooseLowerCase);
-            
-            console.log("push it here array\n" + putshithere);
-          } else {
-            console.log("user LowerCase: " + userChooseLowerCase);
-          }
+      //ask user to choose upper case letters true or false
+      var userChooseLowerCase = window.confirm(
+        "Do you want lowercase letters in your password?"
+      );
+        if(userChooseLowerCase === true){
+          console.log("user LowerCase: " + userChooseLowerCase);
+          
+          console.log("push it here array\n" + putshithere);
+        } else {
+          console.log("user LowerCase: " + userChooseLowerCase);
+        }
 
       var userChooseSpecialChar = window.confirm(
         "Do you want special characters in your password?"
