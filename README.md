@@ -2,6 +2,7 @@
 
 ## Deployment Link
 
+https://dj-viking.github.io/random-password-generator
 
 ## Screenshot
 
@@ -35,7 +36,7 @@ Uppercase   Lowercase  Symbols  Numbers
 * NO, NO, YES, YES
 * NO, NO, NO, YES
 
-# Bugged choices
+## Bugged choices
  * YES NO YES YES 
  doesn't give any upper case letters. They all disappear only contains symbols and numbers.
 
