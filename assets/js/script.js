@@ -31,7 +31,65 @@ var numberCharArray = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 var populatedArrayResult = ["this will be the shuffled array from selected criteria"]
 
 
+var charA = "A";
+var charZ = "Z";
+//generate the alphabet uppercase 
+function genCharArray(charA, charZ) {
+    var a = [], i = charA.charCodeAt(0), j = charZ.charCodeAt(0);
+    for (; i <= j; ++i) {
+        a.push(String.fromCharCode(i));
+    }
+  //return the array 
+    return a;
+}
+//console.log(genCharArray(charA, charZ));
 
+/**************************************************************** */
+/*****************PASSWORD MODIFIER FUNCTION START!!!****************** */
+/**************************************************************** */
+var myArray = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z","A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z","A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z","A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z","A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+//var array = Array(6).concat(myArray);
+//console.log(array);
+var addToArray = [];
+//uppercasechoice modifier first
+//var criteria = 0;
+//THIS IS CURRENTLY SET UP FOR THE CAPITAL LETTER SECTION!!
+var myPassLengthModifier = function(myArray, passLengthCriteria){
+  
+  //var passLengthCriteria = window.prompt(//this is done at the beginning carrying the value over
+      //"enter how many characters you want your password to be: enter any number between 8-128"
+      //);
+    var myArray = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z","A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z","A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z","A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z","A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+    var addToArray = genCharArray(charA, charZ);
+    var modifiedArray = myArray.concat(addToArray);
+    if(passLengthCriteria >= 26 && 
+      passLengthCriteria <= 128){
+    //generate new array of capital letters to concat
+    addToArray = genCharArray(charA, charZ);
+    modifiedArray = myArray.concat(addToArray);
+    //shuffle array
+    shuffleArray(addToArray);
+    console.log("shuffling array that im concatting to myArray");
+    console.log(addToArray);
+    shuffleArray(modifiedArray);
+    shuffleArray(modifiedArray);
+    shuffleArray(modifiedArray);
+    modifiedArray.length = passLengthCriteria;
+    console.log("here is your new array \n" + modifiedArray);
+    return modifiedArray;
+  } else {
+     
+    //password is < 26 but more than 8 slice the array to the shorter length.
+    //console.log(modifiedArray);
+  }
+                                             
+}
+//stored the returned capital letter array into a newly declared variable
+//var newModifiedArrayUpperCase = myPassLengthModifier(myArray, passLengthCriteria);
+
+/**************************************************************** */
+/*****************PASSWORD MODIFIER FUNCTION END!!!************** */
+/**************************************************************** */
 
 
 
@@ -98,7 +156,7 @@ function shuffleArray(anyArray) {
 //referencing strings from a regular array are referenced by index number array[0]
 //define and declare the function generatePassword();
 var generatePassword = function(){
-  //debugger;
+  debugger;
      
     while (restart = true){
       var passLengthCriteria = window.prompt(
@@ -129,20 +187,23 @@ var generatePassword = function(){
         "Do you want uppercase letters in your password?"
       );
         if(userChooseUpperCase === true){
-          console.log("user UpperCase: " + userChooseUpperCase);
-          //call the array up
-          console.log(upperCaseArray); 
-          //shuffle the array
-          console.log(shuffleArray(upperCaseArray));
+          console.log("user UpperCase: " + userChooseUpperCase);//true chose uppercase
+          //PUT IN MODIFIER FUNCTION HERE
+          myPassLengthModifier(upperCaseArray, passLengthCriteria);
+          var newModifiedArrayUpperCase = myPassLengthModifier(upperCaseArray, passLengthCriteria);
+
+
+          //console.log(shuffleArray(upperCaseArray));
           //cut the length of the array by the password length the user chose
          
           //create new name for the array to store the returned value of shuffled array
-          putshithere = shuffleArray(upperCaseArray);
+          var putshithere = newModifiedArrayUpperCase;
+          
           //store the new array in another variable putshithere
           
             console.log("push it here array\n" + putshithere);
           } else {
-            console.log("user UpperCase: " + userChooseUpperCase);
+            console.log("user UpperCase: " + userChooseUpperCase);//false didn't choose uppercase
           }
         //ask user to choose upper case letters true or false
         var userChooseLowerCase = window.confirm(
@@ -180,7 +241,8 @@ var generatePassword = function(){
   //password will contain the result of the random shuffling of the password which contains all of whatever criteria the user confirmed they wanted for their password to be
   console.log("declaring the value of the variable `password` as the function generatePassword() brought me here...")
   //return this value as the result of generating the password here is the end of the function
-  password = populatedArrayResult;
+  //join the array together into a single string
+  password = putshithere.join("");
   console.log("the string value of the new password pulled from an array is " + password);
   return password;
 
@@ -199,3 +261,10 @@ var generatePassword = function(){
 };//end of writePassword() function expression
 
 // Add event listener to generate button
+
+
+
+
+
+
+
