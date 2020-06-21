@@ -480,11 +480,3 @@ var generatePassword = function(){
     passwordText.value = password;
           
 };//end of writePassword() function expression
-
-
-
-
-
-
-
-
