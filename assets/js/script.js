@@ -216,8 +216,7 @@ var generatePassword = function(){
       );
         if(userChooseLowerCase === true){
           console.log("user LowerCase: " + userChooseLowerCase);
-          
-          console.log("push it here array\n" + putshithere);
+      
         } else {
           console.log("user LowerCase: " + userChooseLowerCase);
         }
@@ -241,7 +240,8 @@ var generatePassword = function(){
         }
 
 
-      
+  //make a conditional if the user doesn't choose any criteria that the password does not get written
+  //  
   console.log("generating password..")
   //password will contain the result of the random shuffling of the password which contains all of whatever criteria the user confirmed they wanted for their password to be
   console.log("declaring the value of the variable `password` as the function generatePassword() brought me here...")
