@@ -59,7 +59,7 @@ function genUpperCharArray(charA, charZ) {
 
 //lowercase generator
 var chara = "a";
-var charz = "a";
+var charz = "z";
 //generate the alphabet uppercase 
 function genLowerCharArray(chara, charz) {
     var a = [], i = chara.charCodeAt(0), j = charz.charCodeAt(0);
@@ -79,7 +79,6 @@ var myArray = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", 
 //console.log(array);
 var addToArray = [];
 //uppercasechoice modifier first
-//var criteria = 0;
 //THIS IS CURRENTLY SET UP FOR THE CAPITAL LETTER SECTION!!
 var myUpperPassLengthModifier = function(myArray, passLengthCriteria){
   
@@ -336,7 +335,7 @@ var generatePassword = function(){
      
     while (restart = true){
       var passLengthCriteria = window.prompt(
-      "enter how many characters you want your password to be: enter any number between 8-128"
+      "Thank you for choosing this password generator! How long would you like your password to be? Enter a number between 8 and 128. Click OK to begin the generation!"
       );
         searchIntegerInArray (passLengthCriteria, passLengthArray);
         //verifying if the function is true that user picked a number in the array
@@ -352,16 +351,15 @@ var generatePassword = function(){
           restart = false;//the if condition is true so restart is false!!
           break;//break out of the while loop! we chose a password length number! otherwise you will stay in the while loop!!
         } else { x === false  //condition is false so restart will be true the user entered a number not in the array
-          window.alert("number needs to be a whole number integer between 8-128!!");
+          window.alert(" Your choice needs to be a whole number integer between 8-128. To retry click OK.");
           restart = true;
-        
-        }
+        } 
     }   
         console.log("user entered a choice of password length of: " + passLengthCriteria);
       
       //ask user to choose upper case letters true or false
       var userChooseUpperCase = window.confirm(
-        "Do you want uppercase letters in your password?"
+        "Would you like uppercase letters in your password? Click OK to confirm this choice. Click cancel to deny this choice."
       );
         if(userChooseUpperCase === true){
           console.log("user UpperCase: " + userChooseUpperCase);//true chose uppercase
@@ -383,7 +381,7 @@ var generatePassword = function(){
 
       //ask user to choose lower case letters true or false
       var userChooseLowerCase = window.confirm(
-        "Do you want lowercase letters in your password?"
+        "Would you like lowercase letters in your password? Click OK to confirm this choice. Click cancel to deny this choice."
       );
         if(userChooseLowerCase === true) {
           console.log("user LowerCase: " + userChooseLowerCase);//true
@@ -408,9 +406,9 @@ var generatePassword = function(){
           return newModifiedArrayLowerCase;
         }
         var temporaryspecialchar = setDefaultSpecialChar(); 
-      //ask do you want special chars
+      //ask Would you like  special chars
       var userChooseSpecialChar = window.confirm(
-        "Do you want special characters in your password?"
+        "Would you like special characters in your password? Click OK to confirm this choice. Click cancel to deny this choice."
       );
         if(userChooseSpecialChar === true){
           console.log("user SpecialChar: " + userChooseSpecialChar);//true
@@ -435,9 +433,9 @@ var generatePassword = function(){
         }
         var temporarynumberarray = setDefaultNumbers();
         console.log(newModifiedArraySpecialChar);
-      //ask do you want numbers
+      //ask Would you like  numbers
       var userChooseNumberChar = window.confirm(
-        "Do you want numbers in your password?"
+        "Would you like numbers in your password? Click OK to confirm this choice. Click cancel to deny this choice."
       );
         if(userChooseNumberChar === true){
           console.log("user NumberChar: " + userChooseNumberChar);//true
