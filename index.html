@@ -6,16 +6,72 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Password Generator</title>
     <link rel="stylesheet" href="./assets/css/style.css" />
+    <style>
+
+      .checkbox-container {
+        margin: 10px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .checkbox-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;;
+        margin: 0 auto;
+        transition: .4s;
+        width: 100%;
+      }
+      .checkbox-row label {
+        padding: 20px;
+        border-radius: 10px;
+      }
+
+      .checkbox-row label:hover {
+        color: white;
+        transition: .4s;
+        background-color: black;
+      }
+
+      .invalid-text {
+        color: red;
+        display: block
+      }
+      .invalid-text-hidden {
+        display: none;
+      }
+      .invalid-number {
+        color: red;
+        display: block
+      }
+      .invalid-number-hidden {
+        display: none;
+      }
+
+      .pass-input {
+        font-size: 20px;
+        width: 100px;
+        height: 50px;
+        padding: 5px;
+      }
+
+    </style>
   </head>
-  <body>
+  <body style="background-color: black">
     <div class="wrapper">
       <header>
-        <h1>Password Generator</h1>
+        <h1 style="color: skyblue">
+          Password Generator
+        </h1>
       </header>
       <div class="card">
         <div class="card-header">
           <h2>Generate a Password</h2>
         </div>
+        <span id="passwordDisplayLength">
+          Your Password Length is: 
+        </span>
         <div class="card-body">
           <textarea
             readonly
@@ -24,11 +80,68 @@
             aria-label="Generated Password"
           ></textarea>
         </div>
-        <div class="card-footer">
-          <button id="generate" class="btn">Generate Password</button>
+
+        <div 
+
+        >
+          <form          
+            style="
+              display: flex;
+              flex-direction: column;
+            "
+          >
+            <span id="invalidInput" class="invalid-text-hidden">
+              That is not a valid input value. Must be a number
+            </span>
+            <span id="invalidNumber" class="invalid-number-hidden">
+              Number must be between 8 and 1000
+            </span>
+            <label for="passlength">
+              Input Password Length? (between 8 and 1000)
+            </label>
+            <input class="pass-input" style="width: 50%; margin: 0 auto;" type="number" name="passlength" id="passlength">
+
+            <div class="checkbox-container">
+
+              <div class="checkbox-row">
+                <label style="cursor: pointer;" for="uppercase">
+                  To Contain Uppercase Letters?
+                  <input style="height: 20px; width: 20px;" type="checkbox" name="uppercase" id="uppercase">
+                </label>
+              </div>
+              
+              <div class="checkbox-row">
+                <label style="cursor: pointer" for="lowercase">
+                  To Contain Lowercase Letters?
+                  <input style="height: 20px; width: 20px;" type="checkbox" name="lowerase" id="lowercase">
+                </label>
+              </div>
+              
+              <div class="checkbox-row">
+                <label style="cursor: pointer" for="numbers">
+                  To Contain Numbers?
+                  <input style="height: 20px; width: 20px;" type="checkbox" name="numbers" id="numbers">
+                </label>
+              </div>
+              
+              <div class="checkbox-row">
+                <label style="cursor: pointer" for="symbols">
+                  To Contain Special Symbols?
+                  <input style="height: 20px; width: 20px;" type="checkbox" name="symbols" id="symbols">
+                </label>
+              </div>
+            
+            </div>
+
+            <div class="card-footer">
+              <button id="generate" class="btn">Generate Password</button>
+            </div>
+
+          </form>
+
         </div>
       </div>
     </div>
-    <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/script2.js"></script>
   </body>
 </html>
