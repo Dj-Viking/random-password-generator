@@ -5,12 +5,12 @@ const invalidNumberText = document.getElementById('invalidNumber');
 const generateButtonEl = document.getElementById('generate');
 const generatedPasswordEl = document.getElementById('password');
 const generatedPasswordDisplayLengthEl = document.getElementById('passwordDisplayLength');
-generatedPasswordDisplayLengthEl.style.display = "none";
 const upperCaseArray = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 const lowerCaseArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 const numArray = Array.from('0123456789');
-const symbolsArray = Array.from('!@#$%^&*()_+-=|}{[]?/>.<,¡™£¢∞§¶•ªº–≠œ∑´®†¥¨ˆøπ“åß∂ƒ©˙∆˚');
-console.log(symbolsArray);
+const symbolsArray = shuffleArray(Array.from('!@#$%^&*()_+-=|}{[]?/>.<,¡™£¢∞§¶•ªº–≠œ∑´®†¥¨ˆøπ“åß∂ƒ©˙∆˚')).splice(0, 26);
+generatedPasswordDisplayLengthEl.style.display = "none";
+generatedPasswordEl.style.display = "none";
 //clear the inputs on the page on page load
 document.addEventListener("DOMContentLoaded", function() 
 {
@@ -21,7 +21,51 @@ document.addEventListener("DOMContentLoaded", function()
   document.getElementById('numbers').checked = false;
   document.getElementById('symbols').checked = false;
 });
-function shuffleArray(anyArray) {
+//setter functions for showing and hiding invalid inputs
+function showInvalidTextMsg(textEl, button) {textEl.classList.remove('invalid-text-hidden');textEl.classList.add('invalid-text');button.disabled = true;}
+function hideInvalidTextMsg(textEl, button) {textEl.classList.remove('invalid-text');textEl.classList.add('invalid-text-hidden');button.disabled = false;}
+
+//setter functions for showing and hiding invalid number inputs
+function showInvalidNumMsg(textEl, button) {textEl.classList.remove('invalid-number-hidden');textEl.classList.add('invalid-number');button.disabled = true;}
+function hideInvalidNumMsg(textEl, button) {textEl.classList.remove('invalid-number');textEl.classList.add('invalid-number-hidden');button.disabled = false;}
+
+//create a randomIndexNumber within the range of an array passed into this function
+/**
+ * 
+ * @param {Array<any>} arr any array that we want the amount of indicies it has
+ * @returns {Number} the amount of indicies in the passed in array
+ */
+function getArrayIndiciesNum(arr) {return arr.length - 1;}
+/**
+ * 
+ * @param {Number} min this should be 0 by default, starting at beginning of the array
+ * @param {Number} max The length of the array passed in (using a function to dynamically generate this number)
+ * @returns {Number} return a random number within the range of how many indicies the passed in array has
+ * @example
+ * arr[createRandomIndex(0, getArrayIndiciesNum(arr))]
+ * 
+ */
+function createRandomIndex(min, max) {return Math.floor(Math.random() * (max - min) + min);}
+
+//setter function for the password input length element
+function setPassLengthText(newEl, passEl) 
+{
+  //set the text
+  newEl.innerText = `Your password length is: ${passEl.value.length.toString()}`
+  //show the passlength text element
+  newEl.style.display = "block";
+  //show the textarea element
+  passEl.style.display = "block";
+}
+function setNewPassLengthText(input, newEl) {newEl.innerText = `Your new password length is: ${input.length.toString()}`;}
+
+/**
+ * 
+ * @param {Array<any>} anyArray 
+ * @returns {Array<any>} shuffled array
+ */
+function shuffleArray(anyArray) 
+{
   for (var i = anyArray.length - 1; i > 0; i--) 
   {
     var j = Math.floor(Math.random() * (i + 1));
@@ -31,28 +75,65 @@ function shuffleArray(anyArray) {
   }
   return anyArray;
 }
-//setter functions for showing invalid inputs
-function showInvalidTextMsg(textEl, button) {textEl.classList.remove('invalid-text-hidden');textEl.classList.add('invalid-text');button.disabled = true;}
-function hideInvalidTextMsg(textEl, button) {textEl.classList.remove('invalid-text');textEl.classList.add('invalid-text-hidden');button.disabled = false;}
-//setter functions for showing invalid number inputs
-function showInvalidNumMsg(textEl, button) {textEl.classList.remove('invalid-number-hidden');textEl.classList.add('invalid-number');button.disabled = true;}
-function hideInvalidNumMsg(textEl, button) {textEl.classList.remove('invalid-number');textEl.classList.add('invalid-number-hidden');button.disabled = false;}
-//create a randomIndexNumber within the range of an array passed into this function
-function getArrayIndiciesNum(arr) {return arr.length - 1;}
-function createRandomIndex(min, max) {return Math.floor(Math.random() * (max - min) + min);}
+/**
+ * 
+ * @param {Number} passLength length of the password to generate
+ * @param {Array<String[]>} options arrays to use for the scramble
+ * @returns {String[]} spliced and uberly scrambled array
+ */
+function scrambleArraysAndSplice(passLength, options) 
+{
+  let arrToShuffle = [].concat(...options);
+  for (let i = 0; i < 100; i++)
+  {
+    arrToShuffle = shuffleArray(arrToShuffle);
+  }
+  return arrToShuffle.splice(0, passLength);
+}
+/**
+ * 
+ * @param {Number} passLength length of the password to generate
+ * @param {String[]} splicedArr Array that we are using to replace the values of a new empty array that has the length of the password
+ * @returns {String} the returned password text that we are setting the value of the textarea element to
+ */
+function createPasswordText(passLength, splicedArr) 
+{
+  const arr = new Array(passLength);
+  for (let i = 0; i < arr.length; i++)
+  {
+    arr[i] = 
+      splicedArr[
+        createRandomIndex(0, getArrayIndiciesNum(splicedArr))
+      ]
+    ;
+  }
+  return arr.join('');
+}
+
 //listen for the input on the passlength input element
 // validate input - show/hide message and disable/enable generate button
 passLengthInputEl.addEventListener("input", function() 
 {
   const recentInput = document.getElementById('passlength').value;
   //empty string when strings are typed on the input type="number"
-  if (recentInput === "") showInvalidTextMsg(invalidInputText, generateButtonEl);
+  if (recentInput === "") 
+    showInvalidTextMsg(invalidInputText, generateButtonEl);
   //when a number is finally typed into the field
-  else if (typeof Number(recentInput) === "number") hideInvalidTextMsg(invalidInputText, generateButtonEl);
+  else if (typeof Number(recentInput) === "number") 
+    hideInvalidTextMsg(invalidInputText, generateButtonEl);
   // number out of range
-  if (Number(recentInput) < 8 || Number(recentInput) > 1000) showInvalidNumMsg(invalidNumberText, generateButtonEl);
+  if (Number(recentInput) < 8 || Number(recentInput) > 1000) 
+    showInvalidNumMsg(invalidNumberText, generateButtonEl);
   //correct number
-  else if(Number(recentInput >= 8 && Number(recentInput) <= 1000)) hideInvalidNumMsg(invalidNumberText, generateButtonEl); 
+  else if(Number(recentInput >= 8 && Number(recentInput) <= 1000)) 
+    hideInvalidNumMsg(invalidNumberText, generateButtonEl); 
+});
+
+//listen for changes on the password textarea and update the element displaying the length
+generatedPasswordEl.addEventListener("input", function()
+{
+  const recentInput = document.getElementById('password').value;
+  setNewPassLengthText(recentInput, generatedPasswordDisplayLengthEl);
 });
 
 function generatePassword(event) 
@@ -68,179 +149,201 @@ function generatePassword(event)
   if (validNumber === 0) return alert('Must enter a password length');
   //none were checked
   if (!uppercaseCheck && !lowercaseCheck && !numbersCheck && !symbolsCheck) return alert('must select at least one category');
+
   //only uppercase
   if (uppercaseCheck) 
   {
-    const arr = new Array(validNumber);
-    for (let i = 0; i < arr.length; i++) arr[i] = upperCaseArray[createRandomIndex(0, getArrayIndiciesNum(upperCaseArray))];
-    generatedPasswordEl.value = arr.join('');
-    generatedPasswordDisplayLengthEl.innerText = `Your password length is: ${generatedPasswordEl.value.length.toString()}`;
-    generatedPasswordDisplayLengthEl.style.display = "block";
+    generatedPasswordEl.value = 
+      createPasswordText(
+        validNumber, 
+        scrambleArraysAndSplice(
+          validNumber, 
+          [upperCaseArray]
+        )
+      )
+    ;
+    setPassLengthText(generatedPasswordDisplayLengthEl, generatedPasswordEl);
   }
   //only lowercase
   if (lowercaseCheck)
   {
-    const arr = new Array(validNumber);
-    for (let i = 0; i < arr.length; i++) arr[i] = lowerCaseArray[createRandomIndex(0, getArrayIndiciesNum(lowerCaseArray))];
-    generatedPasswordEl.value = arr.join('');
-    generatedPasswordDisplayLengthEl.innerText = `Your password length is: ${generatedPasswordEl.value.length.toString()}`;
-    generatedPasswordDisplayLengthEl.style.display = "block";
+    generatedPasswordEl.value = createPasswordText(
+        validNumber, 
+        scrambleArraysAndSplice(
+          validNumber, 
+          [lowerCaseArray]
+        )
+      )
+    ;
+    setPassLengthText(generatedPasswordDisplayLengthEl, generatedPasswordEl);
   }
   //only numbers
   if (numbersCheck)
   {
-    const arr = new Array(validNumber);
-    for (let i = 0; i < arr.length; i++) arr[i] = numArray[createRandomIndex(0, getArrayIndiciesNum(numArray))];
-    generatedPasswordEl.value = arr.join('');
-    generatedPasswordDisplayLengthEl.innerText = `Your password length is: ${generatedPasswordEl.value.length.toString()}`;
-    generatedPasswordDisplayLengthEl.style.display = "block";
+    generatedPasswordEl.value = 
+      createPasswordText(
+        validNumber, 
+        scrambleArraysAndSplice(
+          validNumber, 
+          [numArray]
+        )
+      )
+    ;
+    setPassLengthText(generatedPasswordDisplayLengthEl, generatedPasswordEl);
   }
   //only symbols
   if (symbolsCheck)
   {
-    const arr = new Array(validNumber);
-    for (let i = 0; i < arr.length; i++) arr[i] = symbolsArray[createRandomIndex(0, getArrayIndiciesNum(symbolsArray))];
-    generatedPasswordEl.value = arr.join('');
-    generatedPasswordDisplayLengthEl.innerText = `Your password length is: ${generatedPasswordEl.value.length.toString()}`;
-    generatedPasswordDisplayLengthEl.style.display = "block";
+    generatedPasswordEl.value = 
+      createPasswordText(
+        validNumber, 
+        scrambleArraysAndSplice(
+          validNumber, 
+          [symbolsArray]
+        )
+      )
+    ;
+    setPassLengthText(generatedPasswordDisplayLengthEl, generatedPasswordEl);
   }
   //upper and lower
   if (uppercaseCheck && lowercaseCheck) 
   {
-    let shuffledArray = [];
-    let concattedArray = upperCaseArray.concat(lowerCaseArray);
-    //shuffle a ton of times
-    for (let i = 0; i < 1000; i++) shuffledArray = shuffleArray(concattedArray);
-    //splice at the length of the password
-    const splicedArray = shuffledArray.splice(0, validNumber);
-    //create a new array and use the spliced array values and join the array to a string
-    const arr = new Array(validNumber);
-    for (let i = 0; i < arr.length; i++) arr[i] = splicedArray[createRandomIndex(0, getArrayIndiciesNum(splicedArray))];
-    generatedPasswordEl.value = arr.join('');
-    generatedPasswordDisplayLengthEl.innerText = `Your password length is: ${generatedPasswordEl.value.length.toString()}`;
-    generatedPasswordDisplayLengthEl.style.display = "block";
+    generatedPasswordEl.value = 
+      createPasswordText(
+        validNumber, 
+        scrambleArraysAndSplice(
+          validNumber, 
+          [upperCaseArray, lowerCaseArray]
+        )
+      )
+    ;
+    setPassLengthText(generatedPasswordDisplayLengthEl, generatedPasswordEl);
   }
   //numbers and symbols
   if (numbersCheck && symbolsCheck)
   {
-    let shuffledArray = [];
-    let concattedArray = numArray.concat(symbolsArray);
-    for (let i = 0; i < 1000; i++) shuffledArray = shuffleArray(concattedArray);
-    const splicedArray = shuffledArray.splice(0, validNumber);
-    const arr = new Array(validNumber);
-    for (let i = 0; i < arr.length; i++) arr[i] = splicedArray[createRandomIndex(0, getArrayIndiciesNum(splicedArray))];
-    generatedPasswordEl.value = arr.join('');
-    generatedPasswordDisplayLengthEl.innerText = `Your password length is: ${generatedPasswordEl.value.length.toString()}`;
-    generatedPasswordDisplayLengthEl.style.display = "block";
+    generatedPasswordEl.value = 
+      createPasswordText(
+        validNumber, 
+        scrambleArraysAndSplice(
+          validNumber, 
+          [numArray, symbolsArray]
+        )
+      )
+    ;
+    setPassLengthText(generatedPasswordDisplayLengthEl, generatedPasswordEl);
   }
   //upper and symbols
   if (uppercaseCheck && symbolsCheck)
   {
-    let shuffledArray = [];
-    let concattedArray = upperCaseArray.concat(symbolsArray);
-    for (let i = 0; i < 1000; i++) shuffledArray = shuffleArray(concattedArray);
-    const splicedArray = shuffledArray.splice(0, validNumber);
-    const arr = new Array(validNumber);
-    for (let i = 0; i < arr.length; i++) arr[i] = splicedArray[createRandomIndex(0, getArrayIndiciesNum(splicedArray))];
-    generatedPasswordEl.value = arr.join('');
-    generatedPasswordDisplayLengthEl.innerText = `Your password length is: ${generatedPasswordEl.value.length.toString()}`;
-    generatedPasswordDisplayLengthEl.style.display = "block";
+    generatedPasswordEl.value = 
+      createPasswordText(
+        validNumber, 
+        scrambleArraysAndSplice(
+          validNumber, 
+          [upperCaseArray, symbolsArray]
+        )
+      )
+    ;
+    setPassLengthText(generatedPasswordDisplayLengthEl, generatedPasswordEl);
   }
   //lower and symbols
   if (lowercaseCheck && symbolsCheck) 
   {
-    let shuffledArray = [];
-    let concattedArray = lowerCaseArray.concat(symbolsArray);
-    for (let i = 0; i < 1000; i++) shuffledArray = shuffleArray(concattedArray);
-    const splicedArray = shuffledArray.splice(0, validNumber);
-    const arr = new Array(validNumber);
-    for (let i = 0; i < arr.length; i++) arr[i] = splicedArray[createRandomIndex(0, getArrayIndiciesNum(splicedArray))];
-    generatedPasswordEl.value = arr.join('');
-    generatedPasswordDisplayLengthEl.innerText = `Your password length is: ${generatedPasswordEl.value.length.toString()}`;
-    generatedPasswordDisplayLengthEl.style.display = "block";
+    generatedPasswordEl.value =   
+      createPasswordText(
+        validNumber, 
+        scrambleArraysAndSplice(
+          validNumber, 
+          [lowerCaseArray, symbolsArray]
+        )
+      )
+    ;
+    setPassLengthText(generatedPasswordDisplayLengthEl, generatedPasswordEl);
   }
   //upper and numbers
   if (uppercaseCheck && numbersCheck)
   {
-    let shuffledArray = [];
-    let concattedArray = upperCaseArray.concat(numArray);
-    for (let i = 0; i < 1000; i++) shuffledArray = shuffleArray(concattedArray);
-    const splicedArray = shuffledArray.splice(0, validNumber);
-    const arr = new Array(validNumber);
-    for (let i = 0; i < arr.length; i++) arr[i] = splicedArray[createRandomIndex(0, getArrayIndiciesNum(splicedArray))];
-    generatedPasswordEl.value = arr.join('');
-    generatedPasswordDisplayLengthEl.innerText = `Your password length is: ${generatedPasswordEl.value.length.toString()}`;
-    generatedPasswordDisplayLengthEl.style.display = "block";
+    generatedPasswordEl.value = 
+      createPasswordText(
+        validNumber, 
+        scrambleArraysAndSplice(
+          validNumber, 
+          [upperCaseArray, numArray]
+        )
+      )
+    ;
+    setPassLengthText(generatedPasswordDisplayLengthEl, generatedPasswordEl);
   }
   //lower and numbers
   if (lowercaseCheck && numbersCheck)
   {
-    let shuffledArray = [];
-    let concattedArray = lowerCaseArray.concat(numArray);
-    for (let i = 0; i < 1000; i++) shuffledArray = shuffleArray(concattedArray);
-    const splicedArray = shuffledArray.splice(0, validNumber);
-    const arr = new Array(validNumber);
-    for (let i = 0; i < arr.length; i++) arr[i] = splicedArray[createRandomIndex(0, getArrayIndiciesNum(splicedArray))];
-    generatedPasswordEl.value = arr.join('');
-    generatedPasswordDisplayLengthEl.innerText = `Your password length is: ${generatedPasswordEl.value.length.toString()}`;
-    generatedPasswordDisplayLengthEl.style.display = "block";
+    generatedPasswordEl.value = 
+      createPasswordText(
+        validNumber, 
+        scrambleArraysAndSplice(
+          validNumber, 
+          [lowerCaseArray, numArray]
+        )
+      )
+    ;
+    setPassLengthText(generatedPasswordDisplayLengthEl, generatedPasswordEl);
   }
   //upper and lower and numbers
   if (uppercaseCheck && lowercaseCheck & numbersCheck)
   {
-    let shuffledArray = [];
-    let concattedArray = upperCaseArray.concat(lowerCaseArray);
-    concattedArray = numArray.concat(concattedArray);
-    for (let i = 0; i < 1000; i++) shuffledArray = shuffleArray(concattedArray);
-    const splicedArray = shuffledArray.splice(0, validNumber);
-    const arr = new Array(validNumber);
-    for (let i = 0; i < arr.length; i++) arr[i] = splicedArray[createRandomIndex(0, getArrayIndiciesNum(splicedArray))];
-    generatedPasswordEl.value = arr.join('');
-    generatedPasswordDisplayLengthEl.innerText = `Your password length is: ${generatedPasswordEl.value.length.toString()}`;
-    generatedPasswordDisplayLengthEl.style.display = "block";
+    generatedPasswordEl.value = 
+      createPasswordText(
+        validNumber, 
+        scrambleArraysAndSplice(
+          validNumber, 
+          [upperCaseArray, lowerCaseArray, numArray]
+        )
+      )
+    ;
+    setPassLengthText(generatedPasswordDisplayLengthEl, generatedPasswordEl);
   }
   //upper and numbers and symbols
   if (uppercaseCheck && numbersCheck && symbolsCheck)
   {
-    let shuffledArray = [];
-    let concattedArray = upperCaseArray.concat(numArray);
-    concattedArray = symbolsArray.concat(concattedArray);
-    for (let i = 0; i < 1000; i++) shuffledArray = shuffleArray(concattedArray);
-    const splicedArray = shuffledArray.splice(0, validNumber);
-    const arr = new Array(validNumber);
-    for (let i = 0; i < arr.length; i++) arr[i] = splicedArray[createRandomIndex(0, getArrayIndiciesNum(splicedArray))];
-    generatedPasswordEl.value = arr.join('');
-    generatedPasswordDisplayLengthEl.innerText = `Your password length is: ${generatedPasswordEl.value.length.toString()}`;
-    generatedPasswordDisplayLengthEl.style.display = "block";
+    generatedPasswordEl.value = 
+      createPasswordText(
+        validNumber, 
+        scrambleArraysAndSplice(
+          validNumber, 
+          [upperCaseArray, numArray, symbolsArray]
+        )
+      )
+    ;
+    setPassLengthText(generatedPasswordDisplayLengthEl, generatedPasswordEl);
   }
   //lower and numbers and symbols
   if (lowercaseCheck && numbersCheck && symbolsCheck)
   {
-    let shuffledArray = [];
-    let concattedArray = symbolsArray.concat(lowerCaseArray);
-    concattedArray = numArray.concat(concattedArray);
-    for (let i = 0; i < 1000; i++) shuffledArray = shuffleArray(concattedArray);
-    const splicedArray = shuffledArray.splice(0, validNumber);
-    const arr = new Array(validNumber);
-    for (let i = 0; i < arr.length; i++) arr[i] = splicedArray[createRandomIndex(0, getArrayIndiciesNum(splicedArray))];
-    generatedPasswordEl.value = arr.join('');
-    generatedPasswordDisplayLengthEl.innerText = `Your password length is: ${generatedPasswordEl.value.length.toString()}`;
-    generatedPasswordDisplayLengthEl.style.display = "block";
+    generatedPasswordEl.value = 
+      createPasswordText(
+        validNumber, 
+        scrambleArraysAndSplice(
+          validNumber, 
+          [lowerCaseArray, numArray, symbolsArray]
+        )
+      )
+    ;
+    setPassLengthText(generatedPasswordDisplayLengthEl, generatedPasswordEl);
   }
   //all were checked
   if (uppercaseCheck && lowercaseCheck && numbersCheck && symbolsCheck) 
   {
-    let shuffledArray = [];
-    let concattedArray = upperCaseArray.concat(lowerCaseArray);
-    concattedArray = numArray.concat(concattedArray);
-    concattedArray = symbolsArray.concat(concattedArray);
-    for (let i = 0; i < 1000; i++) shuffledArray = shuffleArray(concattedArray);
-    const splicedArray = shuffledArray.splice(0, validNumber);
-    const arr = new Array(validNumber);
-    for (let i = 0; i < arr.length; i++) arr[i] = splicedArray[createRandomIndex(0, getArrayIndiciesNum(splicedArray))];
-    generatedPasswordEl.value = arr.join('');
-    generatedPasswordDisplayLengthEl.innerText = `Your password length is: ${generatedPasswordEl.value.length.toString()}`;
-    generatedPasswordDisplayLengthEl.style.display = "block";
+    generatedPasswordEl.value = 
+      createPasswordText(
+        validNumber, 
+        scrambleArraysAndSplice(
+          validNumber,
+          [upperCaseArray, lowerCaseArray, numArray, symbolsArray]
+        )
+      )
+    ;
+    setPassLengthText(generatedPasswordDisplayLengthEl, generatedPasswordEl);
   }
 }
 generateButtonEl.addEventListener("click", generatePassword);

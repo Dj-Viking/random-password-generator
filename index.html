@@ -72,13 +72,38 @@
         <span id="passwordDisplayLength">
           Your Password Length is: 
         </span>
-        <div class="card-body">
+        <div style="text-align: left; margin-top: 20px;">
+          <strong>
+            Remember to save you password in a safe place!
+          </strong>
+          <p>
+            <strong>
+              (i.e. word document & backed up on a separate harddrive preferably)
+            </strong>
+          </p>
+        </div>
+        <div>
           <textarea
-            readonly
+            style="overflow-y: scroll;"
             id="password"
+            rows="10"
             placeholder="Your Secure Password"
             aria-label="Generated Password"
           ></textarea>
+        </div>
+        
+        <div class="button-container">
+          <!-- <button
+            type="button"
+            style="
+              cursor: pointer;
+              height: 30px;
+              width: 60px;
+            "
+          >
+            <i></i>
+            Copy Password to Clipboard
+          </button> -->
         </div>
 
         <div 
