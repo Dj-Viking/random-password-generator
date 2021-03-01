@@ -66,10 +66,10 @@ function setNewPassLengthText(input, newEl) {newEl.innerText = `Your new passwor
  */
 function shuffleArray(anyArray) 
 {
-  for (var i = anyArray.length - 1; i > 0; i--) 
+  for (let i = anyArray.length - 1; i > 0; i--) 
   {
-    var j = Math.floor(Math.random() * (i + 1));
-    var temp = anyArray[i];
+    let j = Math.floor(Math.random() * (i + 1));
+    let temp = anyArray[i];
     anyArray[i] = anyArray[j];
     anyArray[j] = temp;
   }
