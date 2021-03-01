@@ -10,7 +10,7 @@ https://dj-viking.github.io/random-password-generator
 
 ## Summary
 
-1. Enter into the input field how long your password should be between 1 and 1000 characters
+1. Enter into the input field how long your password should be between 8 and 1000 characters
 
 2. Check which criteria you would like your password to follow in the displayed checkboxes
   * Upper Case letters?
