@@ -167,7 +167,8 @@ function generatePassword(event)
   //only lowercase
   if (lowercaseCheck)
   {
-    generatedPasswordEl.value = createPasswordText(
+    generatedPasswordEl.value = 
+      createPasswordText(
         validNumber, 
         scrambleArraysAndSplice(
           validNumber, 
