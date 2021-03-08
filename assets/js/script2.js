@@ -332,6 +332,18 @@ function generatePassword(event)
     ;
     setPassLengthText(generatedPasswordDisplayLengthEl, generatedPasswordEl);
   }
+  if (uppercaseCheck && lowercaseCheck && symbolsCheck)
+  {
+    generatedPasswordEl.value = 
+      createPasswordText(
+        validNumber,
+        scrambleArraysAndSplice(
+          validNumber,
+          [upperCaseArray, lowerCaseArray, symbolsArray]
+        )
+      )
+    ;
+  }
   //all were checked
   if (uppercaseCheck && lowercaseCheck && numbersCheck && symbolsCheck) 
   {
