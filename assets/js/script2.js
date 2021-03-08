@@ -332,6 +332,7 @@ function generatePassword(event)
     ;
     setPassLengthText(generatedPasswordDisplayLengthEl, generatedPasswordEl);
   }
+  //upper lower and symbols
   if (uppercaseCheck && lowercaseCheck && symbolsCheck)
   {
     generatedPasswordEl.value = 
