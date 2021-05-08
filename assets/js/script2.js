@@ -176,13 +176,6 @@ function generatePassword(event)
   //none were checked
   if (!uppercaseCheck && !lowercaseCheck && !numbersCheck && !symbolsCheck) return alert('must select at least one category');
 
-  const checksToPublish = [];
-  checkedArrayTypes.forEach(type => {
-    if (type) {
-      checksToPublish.push(type);
-    }
-  });
-
   if (checkedArrayTypes.length > 0) {
     generatedPasswordEl.value = createPasswordText(validNumber, scrambleArraysAndSplice(validNumber, chooseArrays(checkedArrayTypes)));
       setPassLengthText(generatedPasswordDisplayLengthEl, generatedPasswordEl);
