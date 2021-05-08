@@ -178,7 +178,7 @@ function generatePassword(event)
 
   if (checkedArrayTypes.length > 0) {
     generatedPasswordEl.value = createPasswordText(validNumber, scrambleArraysAndSplice(validNumber, chooseArrays(checkedArrayTypes)));
-      setPassLengthText(generatedPasswordDisplayLengthEl, generatedPasswordEl);
+    setPassLengthText(generatedPasswordDisplayLengthEl, generatedPasswordEl);
   }
 }
 generateButtonEl.addEventListener("click", generatePassword);
