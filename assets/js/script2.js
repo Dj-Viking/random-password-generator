@@ -158,7 +158,7 @@ function generatePassword(event)
 {
   event.preventDefault();
   //getting the values when the form is submitted and not when the document renders
-  const validNumber = Number(document.getElementById('passlength').value);
+  const passLength = Number(document.getElementById('passlength').value);
   const uppercaseCheck = document.getElementById('uppercase').checked;
   const lowercaseCheck = document.getElementById('lowercase').checked;
   const numbersCheck = document.getElementById('numbers').checked;
@@ -172,12 +172,12 @@ function generatePassword(event)
   ];
 
   console.log(chooseArrays(checkedArrayTypes));
-  if (validNumber === 0) return alert('Must enter a password length');
+  if (passLength === 0) return alert('Must enter a password length');
   //none were checked
   if (!uppercaseCheck && !lowercaseCheck && !numbersCheck && !symbolsCheck) return alert('must select at least one category');
 
   if (checkedArrayTypes.length > 0) {
-    generatedPasswordEl.value = createPasswordText(validNumber, scrambleArraysAndSplice(validNumber, chooseArrays(checkedArrayTypes)));
+    generatedPasswordEl.value = createPasswordText(passLength, scrambleArraysAndSplice(passLength, chooseArrays(checkedArrayTypes)));
     setPassLengthText(generatedPasswordDisplayLengthEl, generatedPasswordEl);
   }
 }
