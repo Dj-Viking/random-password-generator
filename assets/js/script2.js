@@ -5,8 +5,8 @@ const invalidNumberText = document.getElementById('invalidNumber');
 const generateButtonEl = document.getElementById('generate');
 const generatedPasswordEl = document.getElementById('password');
 const generatedPasswordDisplayLengthEl = document.getElementById('passwordDisplayLength');
-const upperCaseArray = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-const lowerCaseArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+const upperCaseArray = Array.from("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+const lowerCaseArray = Array.from(("ABCDEFGHIJKLMNOPQRSTUVWXYZ").toLowerCase())
 const numArray = Array.from('0123456789');
 const symbolsArray = shuffleArray(Array.from('!@#$%^&*()_+-=|}{[]?/>.<,¡™£¢∞§¶•ªº–≠œ∑´®†¥¨ˆøπ“åß∂ƒ©˙∆˚')).splice(0, 26);
 generatedPasswordDisplayLengthEl.style.display = "none";
@@ -110,6 +110,24 @@ function createPasswordText(passLength, splicedArr)
   return arr.join('');
 }
 
+/**
+ * 
+ * @param {string[]} arrayIds 
+ * @returns {Array<string[]>}
+ */
+function chooseArrays(arrayIds){
+  const chosenArrays = [];
+  arrayIds.forEach(id => {
+    if (typeof id === "string") {
+      if (id === "uppercase") chosenArrays.push(upperCaseArray);
+      if (id === "lowercase") chosenArrays.push(lowerCaseArray);
+      if (id === "numbers") chosenArrays.push(numArray);
+      if (id === "symbols") chosenArrays.push(symbolsArray);
+    }
+  })
+  return chosenArrays;
+}
+
 //listen for the input on the passlength input element
 // validate input - show/hide message and disable/enable generate button
 passLengthInputEl.addEventListener("input", function() 
@@ -146,218 +164,28 @@ function generatePassword(event)
   const numbersCheck = document.getElementById('numbers').checked;
   const symbolsCheck = document.getElementById('symbols').checked;
 
+  const checkedArrayTypes = [
+    uppercaseCheck && "uppercase",
+    lowercaseCheck && "lowercase", 
+    numbersCheck && "numbers", 
+    symbolsCheck && "symbols"
+  ];
+
+  console.log(chooseArrays(checkedArrayTypes));
   if (validNumber === 0) return alert('Must enter a password length');
   //none were checked
   if (!uppercaseCheck && !lowercaseCheck && !numbersCheck && !symbolsCheck) return alert('must select at least one category');
 
-  //only uppercase
-  if (uppercaseCheck) 
-  {
-    generatedPasswordEl.value = 
-      createPasswordText(
-        validNumber, 
-        scrambleArraysAndSplice(
-          validNumber, 
-          [upperCaseArray]
-        )
-      )
-    ;
-    setPassLengthText(generatedPasswordDisplayLengthEl, generatedPasswordEl);
-  }
-  //only lowercase
-  if (lowercaseCheck)
-  {
-    generatedPasswordEl.value = 
-      createPasswordText(
-        validNumber, 
-        scrambleArraysAndSplice(
-          validNumber, 
-          [lowerCaseArray]
-        )
-      )
-    ;
-    setPassLengthText(generatedPasswordDisplayLengthEl, generatedPasswordEl);
-  }
-  //only numbers
-  if (numbersCheck)
-  {
-    generatedPasswordEl.value = 
-      createPasswordText(
-        validNumber, 
-        scrambleArraysAndSplice(
-          validNumber, 
-          [numArray]
-        )
-      )
-    ;
-    setPassLengthText(generatedPasswordDisplayLengthEl, generatedPasswordEl);
-  }
-  //only symbols
-  if (symbolsCheck)
-  {
-    generatedPasswordEl.value = 
-      createPasswordText(
-        validNumber, 
-        scrambleArraysAndSplice(
-          validNumber, 
-          [symbolsArray]
-        )
-      )
-    ;
-    setPassLengthText(generatedPasswordDisplayLengthEl, generatedPasswordEl);
-  }
-  //upper and lower
-  if (uppercaseCheck && lowercaseCheck) 
-  {
-    generatedPasswordEl.value = 
-      createPasswordText(
-        validNumber, 
-        scrambleArraysAndSplice(
-          validNumber, 
-          [upperCaseArray, lowerCaseArray]
-        )
-      )
-    ;
-    setPassLengthText(generatedPasswordDisplayLengthEl, generatedPasswordEl);
-  }
-  //numbers and symbols
-  if (numbersCheck && symbolsCheck)
-  {
-    generatedPasswordEl.value = 
-      createPasswordText(
-        validNumber, 
-        scrambleArraysAndSplice(
-          validNumber, 
-          [numArray, symbolsArray]
-        )
-      )
-    ;
-    setPassLengthText(generatedPasswordDisplayLengthEl, generatedPasswordEl);
-  }
-  //upper and symbols
-  if (uppercaseCheck && symbolsCheck)
-  {
-    generatedPasswordEl.value = 
-      createPasswordText(
-        validNumber, 
-        scrambleArraysAndSplice(
-          validNumber, 
-          [upperCaseArray, symbolsArray]
-        )
-      )
-    ;
-    setPassLengthText(generatedPasswordDisplayLengthEl, generatedPasswordEl);
-  }
-  //lower and symbols
-  if (lowercaseCheck && symbolsCheck) 
-  {
-    generatedPasswordEl.value =   
-      createPasswordText(
-        validNumber, 
-        scrambleArraysAndSplice(
-          validNumber, 
-          [lowerCaseArray, symbolsArray]
-        )
-      )
-    ;
-    setPassLengthText(generatedPasswordDisplayLengthEl, generatedPasswordEl);
-  }
-  //upper and numbers
-  if (uppercaseCheck && numbersCheck)
-  {
-    generatedPasswordEl.value = 
-      createPasswordText(
-        validNumber, 
-        scrambleArraysAndSplice(
-          validNumber, 
-          [upperCaseArray, numArray]
-        )
-      )
-    ;
-    setPassLengthText(generatedPasswordDisplayLengthEl, generatedPasswordEl);
-  }
-  //lower and numbers
-  if (lowercaseCheck && numbersCheck)
-  {
-    generatedPasswordEl.value = 
-      createPasswordText(
-        validNumber, 
-        scrambleArraysAndSplice(
-          validNumber, 
-          [lowerCaseArray, numArray]
-        )
-      )
-    ;
-    setPassLengthText(generatedPasswordDisplayLengthEl, generatedPasswordEl);
-  }
-  //upper and lower and numbers
-  if (uppercaseCheck && lowercaseCheck & numbersCheck)
-  {
-    generatedPasswordEl.value = 
-      createPasswordText(
-        validNumber, 
-        scrambleArraysAndSplice(
-          validNumber, 
-          [upperCaseArray, lowerCaseArray, numArray]
-        )
-      )
-    ;
-    setPassLengthText(generatedPasswordDisplayLengthEl, generatedPasswordEl);
-  }
-  //upper and numbers and symbols
-  if (uppercaseCheck && numbersCheck && symbolsCheck)
-  {
-    generatedPasswordEl.value = 
-      createPasswordText(
-        validNumber, 
-        scrambleArraysAndSplice(
-          validNumber, 
-          [upperCaseArray, numArray, symbolsArray]
-        )
-      )
-    ;
-    setPassLengthText(generatedPasswordDisplayLengthEl, generatedPasswordEl);
-  }
-  //lower and numbers and symbols
-  if (lowercaseCheck && numbersCheck && symbolsCheck)
-  {
-    generatedPasswordEl.value = 
-      createPasswordText(
-        validNumber, 
-        scrambleArraysAndSplice(
-          validNumber, 
-          [lowerCaseArray, numArray, symbolsArray]
-        )
-      )
-    ;
-    setPassLengthText(generatedPasswordDisplayLengthEl, generatedPasswordEl);
-  }
-  //upper lower and symbols
-  if (uppercaseCheck && lowercaseCheck && symbolsCheck)
-  {
-    generatedPasswordEl.value = 
-      createPasswordText(
-        validNumber,
-        scrambleArraysAndSplice(
-          validNumber,
-          [upperCaseArray, lowerCaseArray, symbolsArray]
-        )
-      )
-    ;
-  }
-  //all were checked
-  if (uppercaseCheck && lowercaseCheck && numbersCheck && symbolsCheck) 
-  {
-    generatedPasswordEl.value = 
-      createPasswordText(
-        validNumber, 
-        scrambleArraysAndSplice(
-          validNumber,
-          [upperCaseArray, lowerCaseArray, numArray, symbolsArray]
-        )
-      )
-    ;
-    setPassLengthText(generatedPasswordDisplayLengthEl, generatedPasswordEl);
+  const checksToPublish = [];
+  checkedArrayTypes.forEach(type => {
+    if (type) {
+      checksToPublish.push(type);
+    }
+  });
+
+  if (checkedArrayTypes.length > 0) {
+    generatedPasswordEl.value = createPasswordText(validNumber, scrambleArraysAndSplice(validNumber, chooseArrays(checkedArrayTypes)));
+      setPassLengthText(generatedPasswordDisplayLengthEl, generatedPasswordEl);
   }
 }
 generateButtonEl.addEventListener("click", generatePassword);
