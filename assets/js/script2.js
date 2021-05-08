@@ -164,6 +164,7 @@ function generatePassword(event)
   const numbersCheck = document.getElementById('numbers').checked;
   const symbolsCheck = document.getElementById('symbols').checked;
 
+  //and operator to check if the && expression evaluates true then yield the string value next to it for that index
   const checkedArrayTypes = [
     uppercaseCheck && "uppercase",
     lowercaseCheck && "lowercase", 
