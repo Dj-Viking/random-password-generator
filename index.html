@@ -5,58 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Password Generator</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     <link rel="stylesheet" href="./assets/css/style.css" />
-    <style>
-
-      .checkbox-container {
-        margin: 10px 0;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
-
-      .checkbox-row {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;;
-        margin: 0 auto;
-        transition: .4s;
-        width: 100%;
-      }
-      .checkbox-row label {
-        padding: 20px;
-        border-radius: 10px;
-      }
-
-      .checkbox-row label:hover {
-        color: white;
-        transition: .4s;
-        background-color: black;
-      }
-
-      .invalid-text {
-        color: red;
-        display: block
-      }
-      .invalid-text-hidden {
-        display: none;
-      }
-      .invalid-number {
-        color: red;
-        display: block
-      }
-      .invalid-number-hidden {
-        display: none;
-      }
-
-      .pass-input {
-        font-size: 20px;
-        width: 100px;
-        height: 50px;
-        padding: 5px;
-      }
-
-    </style>
   </head>
   <body style="background-color: black">
     <div class="wrapper">
@@ -83,6 +33,7 @@
           </p>
         </div>
         <div>
+
           <textarea
             style="overflow-y: scroll;"
             id="password"
@@ -90,25 +41,12 @@
             placeholder="Your Secure Password"
             aria-label="Generated Password"
           ></textarea>
+          <button id="copy-button" style="margin-top: 1em;" class="copy-button" type="button">
+            <span id="tooltip" class="tooltip">Copy to Clipboard</span>
+            <i class="far fa-copy"></i>
+          </button>
         </div>
         
-        <div class="button-container">
-          <!-- <button
-            type="button"
-            style="
-              cursor: pointer;
-              height: 30px;
-              width: 60px;
-            "
-          >
-            <i></i>
-            Copy Password to Clipboard
-          </button> -->
-        </div>
-
-        <div 
-
-        >
           <form          
             style="
               display: flex;
@@ -167,6 +105,7 @@
         </div>
       </div>
     </div>
+    <script src="./assets/js/utils/helpers.js"></script>
     <script src="./assets/js/script2.js"></script>
   </body>
 </html>
